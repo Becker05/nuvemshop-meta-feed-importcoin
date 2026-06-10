@@ -1,3 +1,5 @@
+import { decode } from "he";
+
 function firstDefined(...values) {
   return values.find((value) => value !== undefined && value !== null && value !== "");
 }
@@ -22,8 +24,7 @@ function getLocalizedValue(value) {
 }
 
 function stripHtml(html = "") {
-  return String(html)
-    .replace(/<[^>]*>/g, " ")
+  return decode(String(html).replace(/<[^>]*>/g, " "))
     .replace(/\s+/g, " ")
     .trim();
 }
